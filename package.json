@@ -1,0 +1,23 @@
+{
+  "name": "meal-swipe",
+  "version": "1.0.0",
+  "description": "Figure out where to eat",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomtom28/meal-swipe.git"
+  },
+  "author": "tomtom28",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tomtom28/meal-swipe/issues"
+  },
+  "homepage": "https://github.com/tomtom28/meal-swipe#readme",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "dotenv": "^4.0.0"
+  }
+}
