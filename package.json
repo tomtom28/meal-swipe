@@ -1,23 +1,27 @@
 {
   "name": "meal-swipe",
-  "version": "1.0.0",
-  "description": "Figure out where to eat",
-  "main": "index.js",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "react-native-scripts": "1.3.1",
+    "jest-expo": "~20.0.0",
+    "react-test-renderer": "16.0.0-alpha.12"
+  },
+  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-native-scripts start",
+    "eject": "react-native-scripts eject",
+    "android": "react-native-scripts android",
+    "ios": "react-native-scripts ios",
+    "test": "node node_modules/jest/bin/jest.js --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tomtom28/meal-swipe.git"
+  "jest": {
+    "preset": "jest-expo"
   },
-  "author": "tomtom28",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/tomtom28/meal-swipe/issues"
-  },
-  "homepage": "https://github.com/tomtom28/meal-swipe#readme",
   "dependencies": {
-    "axios": "^0.16.2",
-    "dotenv": "^4.0.0"
+    "expo": "^20.0.0",
+    "native-base": "^2.3.1",
+    "react": "16.0.0-alpha.12",
+    "react-native": "^0.47.0"
   }
 }
