@@ -25,8 +25,6 @@ export default class SwipeImage extends Component {
     // Get photo reference
     photoRef = this.props.photoRef;
 
-    console.log(photoRef)
-
     // Need to hold on to "this"
     let swipeComponent = this;
 
@@ -42,7 +40,7 @@ export default class SwipeImage extends Component {
     else if (photoRef == "none") {
       swipeComponent.setState({IMAGE: imgDefault});
     }
-    // Has Photo, so hit Google API
+    // Has photo, so hit Google API
     else {
 
       // Make a request for a user with a given ID
@@ -54,11 +52,11 @@ export default class SwipeImage extends Component {
           }
         })
         .then(function (response) {
-          // swipeComponent.forceUpdate();
+        // Set image to Google Places image URL
         swipeComponent.setState({IMAGE: {uri: response.request.responseURL} });
-          // "https://lh3.googleusercontent.com/p/AF1QipMDAy7xUJUjJfbOTtcO_0TQgErWQwAWWuWMmBwY=s1600-w256"
         })
         .catch(function (error) {
+          // Some kind of API issue, just render the defualt image and move on with life
           console.log(error);
           swipeComponent.setState({IMAGE: imgDefault});
         });

@@ -21,7 +21,7 @@ export default class ViewSwipe extends Component {
             dataSource={this.props.listOfPlaces}
 
             // Render All Dining Options
-            renderItem={item =>
+            renderItem={ (item) =>
               <Card style={{ elevation: 3 }}>
                 <CardItem>
                     <Body>
@@ -30,7 +30,8 @@ export default class ViewSwipe extends Component {
                     </Body>
                 </CardItem>
                 <CardItem cardBody>
-                  <SwipeImage GOOGLE_API_KEY={this.props.GOOGLE_API_KEY} photoRef={item.photoRef} />
+                  {/* Be aware that each image needs a unique key to track state properly */}
+                  <SwipeImage key={item.name} GOOGLE_API_KEY={this.props.GOOGLE_API_KEY} photoRef={item.photoRef} />
                 </CardItem>
                 <CardItem>
                   <Icon name="navigate" />
