@@ -4,58 +4,13 @@ import { Container, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Bod
 import axios from 'axios';
 
 
-const imgPlaceholder = require('../img/burger.png');
-const imgAlert = require('../img/alert.png');
-const imgDanger = require('../img/danger.png');
-const imgDefault = require('../img/cutlery.png');
+import SwipeImage from './SwipeImage';
 
 
 export default class ViewSwipe extends Component {
 
   constructor(props) {
     super(props);
-  }
-
-  _showImage(photoRef) {
-
-    // Need to hold on to "this"
-    let swipeComponent = this;
-
-    // Null (i.e. user skipped a step)
-    if (photoRef == null) {
-      return imgDanger;
-    }
-    // No photo because no places found
-    else if (photoRef == "n/a") {
-      return imgAlert;
-    }
-    // No photo but real place
-    else if (photoRef == "none") {
-      return imgDefault;
-    }
-    // Has Photo, so hit Google API
-    else {
-
-      // Make a request for a user with a given ID
-      axios.get('https://maps.googleapis.com/maps/api/place/photo?', {
-          params: {
-            maxwidth: 256,
-            photoreference: photoRef,
-            key: swipeComponent.props.GOOGLE_API_KEY,
-          }
-        })
-        .then(function (response) {
-          // swipeComponent.forceUpdate();
-          return {uri: response.request.responseURL};
-          // "https://lh3.googleusercontent.com/p/AF1QipMDAy7xUJUjJfbOTtcO_0TQgErWQwAWWuWMmBwY=s1600-w256"
-        })
-        .catch(function (error) {
-          console.log(error);
-          return imgDefault;
-        });
-
-    }
-
   }
 
   render() {
@@ -75,7 +30,7 @@ export default class ViewSwipe extends Component {
                     </Body>
                 </CardItem>
                 <CardItem cardBody>
-                  <Image style={{ height: 350, flex: 1 }} source={this._showImage(item.photoRef)} />
+                  <SwipeImage GOOGLE_API_KEY={this.props.GOOGLE_API_KEY} photoRef={item.photoRef} />
                 </CardItem>
                 <CardItem>
                   <Icon name="navigate" />
