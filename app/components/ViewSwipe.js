@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Image } from 'react-native';
 import { Container, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Icon } from 'native-base';
+import axios from 'axios';
+
 
 const imgPlaceholder = require('../img/burger.png');
 const imgAlert = require('../img/alert.png');
@@ -16,6 +18,9 @@ export default class ViewSwipe extends Component {
 
   _showImage(photoRef) {
 
+    // Need to hold on to "this"
+    let swipeComponent = this;
+
     // Null (i.e. user skipped a step)
     if (photoRef == null) {
       return imgDanger;
@@ -30,7 +35,25 @@ export default class ViewSwipe extends Component {
     }
     // Has Photo, so hit Google API
     else {
-      return imgPlaceholder;
+
+      // Make a request for a user with a given ID 
+      axios.get('https://maps.googleapis.com/maps/api/place/photo?', {
+          params: {
+            maxwidth: 256,
+            photoreference: photoRef,
+            key: swipeComponent.props.GOOGLE_API_KEY,
+          }
+        })
+        .then(function (response) {
+          // swipeComponent.forceUpdate();
+          return {uri: response.request.responseURL};
+          // "https://lh3.googleusercontent.com/p/AF1QipMDAy7xUJUjJfbOTtcO_0TQgErWQwAWWuWMmBwY=s1600-w256"
+        })
+        .catch(function (error) {
+          console.log(error);
+          return imgDefault;
+        });
+
     }
 
   }

@@ -25,6 +25,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      GOOGLE_API_KEY: GOOGLE_API_KEY,
       activeView: "about",
       listOfPlaces: [
         {
@@ -145,7 +146,7 @@ export default class App extends Component {
       selectedView = <ViewCuisine _searchSelectedCuisines={this._searchSelectedCuisines.bind(this)} />;
     }
     else if (this.state.activeView == "swipe") {
-      selectedView = <ViewSwipe listOfPlaces={this.state.listOfPlaces} />;
+      selectedView = <ViewSwipe GOOGLE_API_KEY={this.state.GOOGLE_API_KEY} listOfPlaces={this.state.listOfPlaces} />;
     }
     else {
       selectedView = <ViewAbout />;
