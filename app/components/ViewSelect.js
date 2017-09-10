@@ -3,16 +3,18 @@ import { ListView, StyleSheet } from 'react-native';
 import { Container, Header, Content, Button, Icon, Left, List, ListItem, Text } from 'native-base';
 
 
-const datas = [
-  'Simon Mignolet',
-  'Nathaniel Clyne',
-  'Dejan Lovren',
-  'Mama Sakho',
-  'Alberto Moreno',
-  'Emre Can',
-  'Joe Allen',
-  'Phil Coutinho',
-];
+// const datas = [
+//   'Simon Mignolet',
+//   'Nathaniel Clyne',
+//   'Dejan Lovren',
+//   'Mama Sakho',
+//   'Alberto Moreno',
+//   'Emre Can',
+//   'Joe Allen',
+//   'Phil Coutinho',
+// ];
+
+let datas = ["No places yet! Please swipe right on a few."];
 
 const styles = StyleSheet.create({
   listTitle: {
@@ -37,6 +39,15 @@ export default class ViewSelect extends Component {
   componentWillMount() {
     let listOfUserSelections = this.props.listOfUserSelections;
     console.log("list: " + listOfUserSelections);
+
+    // Just get place names for now (if they are any)
+    if (listOfUserSelections.length > 0) {
+      datas = [];
+    }
+    for (let i=0; i<listOfUserSelections.length; i++ ) {
+      datas.push(listOfUserSelections[i].name);
+    }
+
   }
 
 

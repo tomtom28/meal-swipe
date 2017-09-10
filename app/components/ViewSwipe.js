@@ -30,6 +30,8 @@ export default class ViewSwipe extends Component {
   _saveRightSwipe(rightSwipedPlaceLocation) {
     let rightSwipedPlace = this.state.listOfPlaces[rightSwipedPlaceLocation];
     this.props._pushToListOfUserSelections(rightSwipedPlace);
+    // Increment count after saving location
+    this.setState({currentPlace: ( (this.state.currentPlace+1) % this.state.listOfPlaces.length ) });
   }
 
 
@@ -43,7 +45,7 @@ export default class ViewSwipe extends Component {
             // Increment place counter on any swipe
             // Note that Mod (%) is used because the card deck repeats
             onSwipeLeft={ () => this.setState({currentPlace: ( (this.state.currentPlace+1) % this.state.listOfPlaces.length ) }) }
-            onSwipeRight={ () => this.setState({currentPlace: ( (this.state.currentPlace+1) % this.state.listOfPlaces.length ) }, () => this._saveRightSwipe(this.state.currentPlace) ) }
+            onSwipeRight={ () => this._saveRightSwipe(this.state.currentPlace) }
 
             // Render All Dining Options
             renderItem={ (item) =>
