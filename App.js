@@ -44,8 +44,8 @@ export default class App extends Component {
           photoRef: null,
           address: "This is not a real location."
         }
-
-      ]
+      ],
+      listOfUserSelections: []
     };
   }
 
@@ -53,6 +53,14 @@ export default class App extends Component {
   // Change state (via footer selection)
   _toggleView(selection) {
     this.setState({activeView: selection});
+  }
+
+
+  // Append new right swipe to user's list
+  _pushToListOfUserSelections(newSelection) {
+    let listOfUserSelections = this.state.listOfUserSelections;
+    listOfUserSelections.push(newSelection);
+    this.setState({ listOfUserSelections: listOfUserSelections });
   }
 
 
@@ -150,13 +158,13 @@ export default class App extends Component {
     let selectedView;
 
     if (this.state.activeView == "select") {
-      selectedView = <ViewSelect />;
+      selectedView = <ViewSelect listOfUserSelections={this.state.listOfUserSelections} />;
     }
     else if (this.state.activeView == "cuisine") {
       selectedView = <ViewCuisine _searchSelectedCuisines={this._searchSelectedCuisines.bind(this)} />;
     }
     else if (this.state.activeView == "swipe") {
-      selectedView = <ViewSwipe GOOGLE_API_KEY={this.state.GOOGLE_API_KEY} listOfPlaces={this.state.listOfPlaces} />;
+      selectedView = <ViewSwipe GOOGLE_API_KEY={this.state.GOOGLE_API_KEY} listOfPlaces={this.state.listOfPlaces} _pushToListOfUserSelections={this._pushToListOfUserSelections.bind(this)} />;
     }
     else {
       selectedView = <ViewAbout />;

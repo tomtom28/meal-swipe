@@ -33,6 +33,13 @@ export default class ViewSelect extends Component {
     };
   }
 
+
+  componentWillMount() {
+    let listOfUserSelections = this.props.listOfUserSelections;
+    console.log("list: " + listOfUserSelections);
+  }
+
+
   deleteRow(secId, rowId, rowMap) {
     rowMap[`${secId}${rowId}`].props.closeRow();
     const newData = [...this.state.listViewData];
