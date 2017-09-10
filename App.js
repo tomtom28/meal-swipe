@@ -179,6 +179,7 @@ export default class App extends Component {
          </Container>
 
         <AppFooter
+          _activeView={this.state.activeView}
           _toggledFooter={this._toggleView.bind(this)}
         />
 

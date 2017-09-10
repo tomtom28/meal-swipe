@@ -9,23 +9,23 @@ export default class AppFooter extends Component {
       <Footer>
         <FooterTab>
 
-          <Button onPress={ () => this.props._toggledFooter("about")} >
-            <Icon name="person" />
+          <Button active={ (this.props._activeView == "about") } onPress={ () => this.props._toggledFooter("about")} >
+            <Icon active={ (this.props._activeView == "about") } name="person" />
             <Text>About</Text>
           </Button>
 
-          <Button onPress={ () => this.props._toggledFooter("cuisine")} >
-            <Icon name="pizza" />
+          <Button active={ (this.props._activeView == "cuisine") } onPress={ () => this.props._toggledFooter("cuisine")} >
+            <Icon active={ (this.props._activeView == "cuisine") } name="pizza" />
             <Text>Cuisine</Text>
           </Button>
 
-          <Button onPress={ () => this.props._toggledFooter("swipe")} >
-            <Icon name="speedometer" />
+          <Button active={ (this.props._activeView == "swipe") } onPress={ () => this.props._toggledFooter("swipe")} >
+            <Icon active={ (this.props._activeView == "swipe") } name="speedometer" />
             <Text>Swipe</Text>
           </Button>
 
-          <Button onPress={ () => this.props._toggledFooter("select")} >
-            <Icon name="bulb" />
+          <Button active={ (this.props._activeView == "select") } onPress={ () => this.props._toggledFooter("select")} >
+            <Icon active={ (this.props._activeView == "select") } name="bulb" />
             <Text>Select</Text>
           </Button>
 
