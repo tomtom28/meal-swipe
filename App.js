@@ -13,7 +13,7 @@ import ViewSwipe from './app/components/ViewSwipe';
 
 
 // Gobal Variables
-const GOOGLE_API_KEY = "AIzaSyDMuJ_fm2PCGFSJDE9BolV_W09zS-JaAY8";
+const GOOGLE_API_KEY = "";
 const LOCATION = "40.5513798,-74.2798068";
 const RADIUS  = 500;
 const TYPES = "food,restaurant,bar";
