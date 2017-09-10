@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container } from 'native-base';
-import { Router, Scene } from 'react-native-router-flux';
+
 
 // Custom Component Imports
 import AppFooter from './app/components/AppFooter';
@@ -12,6 +12,47 @@ import ViewSwipe from './app/components/ViewSwipe';
 
 
 export default class App extends Component {
+
+  // Track which Component is selected
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeView: "about",
+      apiResponse: {}
+    };
+  }
+
+
+  // Change state (via footer selection)
+  _toggledFooter(selection) {
+    this.setState({activeView: selection}); 
+  }
+
+
+  // Determine which Component to render
+  _renderSelectedView() {
+    let selectedView;
+
+    if (this.state.activeView == "select") {
+      selectedView = <ViewSelect />;
+    }
+    else if (this.state.activeView == "cuisine") {
+      selectedView = <ViewCuisine />;
+    }
+    else if (this.state.activeView == "swipe") {
+      selectedView = <ViewSwipe />;
+    }
+    else {
+      selectedView = <ViewAbout />;
+    }
+    return selectedView;
+  }
+
+
+
+
+
+
   render() {
     return (
 
@@ -20,37 +61,14 @@ export default class App extends Component {
         <AppHeader />
 
 
-        <Router>
-          <Scene key="root">
-            <Scene key="about"
-              component={ViewAbout}
-              title="About"
-              tabs={true}
-              initial
-            />
-            <Scene
-              key="cuisine"
-              component={ViewCuisine}
-              title="Cuisine"
-              tabs={true}
-            />
-            <Scene
-              key="swipe"
-              component={ViewSwipe}
-              title="Swipe"
-              tabs={true}
-            />
-            <Scene
-              key="select"
-              component={ViewSelect}
-              title="Select"
-              tabs={true}
-            />
-          </Scene>
-        </Router>
+         <Container>
+          { this._renderSelectedView() }
+         </Container>
 
 
-        <AppFooter />
+        <AppFooter 
+          _toggledFooter={this._toggledFooter.bind(this)}
+        />
 
       </Container>
 
