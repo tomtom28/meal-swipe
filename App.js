@@ -14,12 +14,22 @@ import ViewSwipe from './app/components/ViewSwipe';
 
 // Gobal Variables
 const GOOGLE_API_KEY = "";
-const LOCATION = "40.5513798,-74.2798068";
-const RADIUS  = 500;
+let LOCATION = "40.730604,-73.9937027"; //default location (Facebook NYC)
+const RADIUS  = 5000; // radius in meters (5k is 3.1 miles)
 const TYPES = "food,restaurant,bar";
 
 
+// Get User Location
+navigator.geolocation.getCurrentPosition(function(response) {
+  let lat = response.coords.latitude;
+  let lng = response.coords.longitude;
+  LOCATION = lat + "," + lng;
+});
+
+
+// App Component
 export default class App extends Component {
+
 
   // Track which Component is selected
   constructor(props) {
@@ -42,13 +52,13 @@ export default class App extends Component {
 
   // Change state (via footer selection)
   _toggleView(selection) {
-    this.setState({activeView: selection}); 
+    this.setState({activeView: selection});
   }
 
 
   // Search Google API (using cuisine submission)
   _searchSelectedCuisines(submission) {
-    
+
     // Need to hold on to "this"
     let appComponent = this;
 
@@ -118,7 +128,7 @@ export default class App extends Component {
           listOfPlaces.push(currentPlaceObj);
 
         }
-        
+
       }
 
       // Set State to API info and call on swipe view component
@@ -155,23 +165,20 @@ export default class App extends Component {
   }
 
 
-
-
-
+  // Render the actual UI
   render() {
+
     return (
 
       <Container>
 
         <AppHeader />
 
-
          <Container>
           { this._renderSelectedView() }
          </Container>
 
-
-        <AppFooter 
+        <AppFooter
           _toggledFooter={this._toggleView.bind(this)}
         />
 

@@ -36,7 +36,7 @@ export default class ViewSwipe extends Component {
     // Has Photo, so hit Google API
     else {
 
-      // Make a request for a user with a given ID 
+      // Make a request for a user with a given ID
       axios.get('https://maps.googleapis.com/maps/api/place/photo?', {
           params: {
             maxwidth: 256,
