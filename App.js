@@ -30,7 +30,7 @@ export default class App extends Component {
         {
           name: "Please Submit Your Cuisines!",
           rating: 0.0,
-          photoRef: undefined,
+          photoRef: null,
           address: "This is not a real location."
         }
 
@@ -70,7 +70,18 @@ export default class App extends Component {
 
       // Determine if any places were found
       if (placesArray.length == 0) {
+
         console.log("No places found");
+
+        let currentPlaceObj = {
+            name: "Sorry. No places were found!",
+            rating: 0.0,
+            photoRef: "n/a",
+            address: "Please refine your cuisine selection."
+        };
+
+        listOfPlaces.push(currentPlaceObj);
+
       }
       else {
 
@@ -88,7 +99,7 @@ export default class App extends Component {
           }
           let placePhotoReference;
           if (!currentPlace.photos) {
-            placePhotoReference = undefined;
+            placePhotoReference = "none";
           }
           else {
             placePhotoReference = currentPlace.photos[0].photo_reference;

@@ -3,12 +3,36 @@ import { Image } from 'react-native';
 import { Container, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Icon } from 'native-base';
 
 const imgPlaceholder = require('../img/burger.png');
+const imgAlert = require('../img/alert.png');
+const imgDanger = require('../img/danger.png');
+const imgDefault = require('../img/cutlery.png');
 
 
 export default class ViewSwipe extends Component {
 
   constructor(props) {
     super(props);
+  }
+
+  _showImage(photoRef) {
+
+    // Null (i.e. user skipped a step)
+    if (photoRef == null) {
+      return imgDanger;
+    }
+    // No photo because no places found
+    else if (photoRef == "n/a") {
+      return imgAlert;
+    }
+    // No photo but real place
+    else if (photoRef == "none") {
+      return imgDefault;
+    }
+    // Has Photo, so hit Google API
+    else {
+      return imgPlaceholder;
+    }
+
   }
 
   render() {
@@ -28,7 +52,7 @@ export default class ViewSwipe extends Component {
                     </Body>
                 </CardItem>
                 <CardItem cardBody>
-                  <Image style={{ height: 350, flex: 1 }} source={imgPlaceholder} />
+                  <Image style={{ height: 350, flex: 1 }} source={this._showImage(item.photoRef)} />
                 </CardItem>
                 <CardItem>
                   <Icon name="navigate" />
