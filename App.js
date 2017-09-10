@@ -26,7 +26,15 @@ export default class App extends Component {
     super(props);
     this.state = {
       activeView: "about",
-      listOfPlaces: [1,2,3]
+      listOfPlaces: [
+        {
+          name: "Please Submit Your Cuisines!",
+          rating: 0.0,
+          photoRef: undefined,
+          address: "This is not a real location."
+        }
+
+      ]
     };
   }
 
@@ -74,9 +82,13 @@ export default class App extends Component {
 
           // Get current location's attributes
           let placeName = currentPlace.name;
+          let placeRating = currentPlace.rating;
+          if (placeRating == undefined) {
+            placeRating = "No"
+          }
           let placePhotoReference;
           if (!currentPlace.photos) {
-            placePhotoReference = null;
+            placePhotoReference = undefined;
           }
           else {
             placePhotoReference = currentPlace.photos[0].photo_reference;
@@ -86,6 +98,7 @@ export default class App extends Component {
           // Push current place object to array
           let currentPlaceObj = {
             name: placeName,
+            rating: placeRating,
             photoRef: placePhotoReference,
             address: placeAddress
           };
@@ -121,7 +134,7 @@ export default class App extends Component {
       selectedView = <ViewCuisine _searchSelectedCuisines={this._searchSelectedCuisines.bind(this)} />;
     }
     else if (this.state.activeView == "swipe") {
-      selectedView = <ViewSwipe />;
+      selectedView = <ViewSwipe listOfPlaces={this.state.listOfPlaces} />;
     }
     else {
       selectedView = <ViewAbout />;

@@ -2,37 +2,21 @@ import React, { Component } from 'react';
 import { Image } from 'react-native';
 import { Container, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Icon } from 'native-base';
 
-
-const cards = [
-  {
-    name: 'Place One',
-    rating: '4.7',
-    image: require('../img/burger.png'),
-    location: '300 Main Street, Edison'
-  },
-  {
-    name: 'Place Two',
-    rating: '3.1',
-    image: require('../img/burger.png'),
-    location: '1221 7th Ave, NYC'
-  },
-  {
-    name: 'Place Three',
-    rating: '2.3',
-    image: require('../img/burger.png'),
-    location: '920 Stone Road, Palo Alto'
-  },
-
-];
+const imgPlaceholder = require('../img/burger.png');
 
 
 export default class ViewSwipe extends Component {
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <Container>
         <View>
           <DeckSwiper
-            dataSource={cards}
+            dataSource={this.props.listOfPlaces}
 
             // Render All Dining Options
             renderItem={item =>
@@ -40,15 +24,15 @@ export default class ViewSwipe extends Component {
                 <CardItem>
                     <Body>
                       <Text>{item.name}</Text>
-                      <Text note>{item.rating} Rating</Text>
+                      <Text note>{ Number.isInteger(item.rating) ? (item.rating + ".0") : item.rating} Rating</Text>
                     </Body>
                 </CardItem>
                 <CardItem cardBody>
-                  <Image style={{ height: 350, flex: 1 }} source={item.image} />
+                  <Image style={{ height: 350, flex: 1 }} source={imgPlaceholder} />
                 </CardItem>
                 <CardItem>
                   <Icon name="navigate" />
-                  <Text>{item.location}</Text>
+                  <Text>{item.address}</Text>
                 </CardItem>
               </Card>
             }
