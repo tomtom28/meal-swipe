@@ -24,8 +24,17 @@ export default class App extends Component {
 
 
   // Change state (via footer selection)
-  _toggledFooter(selection) {
+  _toggleView(selection) {
     this.setState({activeView: selection}); 
+  }
+
+
+  // Search Google API (using cuisine submission)
+  _searchSelectedCuisines(submission) {
+    console.log(submission)
+
+    
+
   }
 
 
@@ -37,7 +46,7 @@ export default class App extends Component {
       selectedView = <ViewSelect />;
     }
     else if (this.state.activeView == "cuisine") {
-      selectedView = <ViewCuisine />;
+      selectedView = <ViewCuisine _searchSelectedCuisines={this._searchSelectedCuisines.bind(this)} />;
     }
     else if (this.state.activeView == "swipe") {
       selectedView = <ViewSwipe />;
@@ -47,7 +56,6 @@ export default class App extends Component {
     }
     return selectedView;
   }
-
 
 
 
@@ -67,7 +75,7 @@ export default class App extends Component {
 
 
         <AppFooter 
-          _toggledFooter={this._toggledFooter.bind(this)}
+          _toggledFooter={this._toggleView.bind(this)}
         />
 
       </Container>
