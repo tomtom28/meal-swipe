@@ -9,7 +9,7 @@ export default class ViewAbout extends Component {
             <CardItem>
               <Body>
                 <Text>
-                   Step 1 {"\n"}
+                   Step 1 - Add a *Cuisine* {"\n\n"}
                    Select from a list of cuisine options.
                 </Text>
               </Body>
@@ -18,8 +18,8 @@ export default class ViewAbout extends Component {
           <Card>
             <CardItem>
                 <Text>
-                   Step 2 {"\n"}
-                   Swipe Right on places that like good. {"\n"}
+                   Step 2 - *Swipe* Away {"\n\n"}
+                   Swipe Right on places that look good. {"\n"}
                    Swipe Left on places that don't look so good.
                 </Text>
             </CardItem>
@@ -28,7 +28,7 @@ export default class ViewAbout extends Component {
             <CardItem>
               <Body>
                 <Text>
-                   Step 3 {"\n"}
+                   Step 3 - *Select* a Place {"\n\n"}
                    Select from your list of dining options.
                 </Text>
               </Body>
