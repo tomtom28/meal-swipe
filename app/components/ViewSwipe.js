@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image } from 'react-native';
+import { Image, Alert } from 'react-native';
 import { Container, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Icon } from 'native-base';
 import axios from 'axios';
 
@@ -19,10 +19,20 @@ export default class ViewSwipe extends Component {
 
 
   componentDidUpdate() {
+
     // Alert User that they swiped through everything
     if (this.state.currentPlace == 0) {
-      console.log("Repeating list");
+      // Render an alert box
+      Alert.alert(
+        'Card Deck Finished',
+        'The locations will repeat, try adding more cuisines if you still need more options.',
+        [
+          {text: 'OK'}
+        ],
+        { cancelable: false }
+      )
     }
+
   }
 
 

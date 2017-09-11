@@ -47,6 +47,7 @@ export default class ViewSelect extends Component {
     for (let i=0; i<listOfUserSelections.length; i++ ) {
       datas.push(listOfUserSelections[i].name);
     }
+    this.setState({listViewData: datas})
 
   }
 

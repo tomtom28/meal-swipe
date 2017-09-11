@@ -14,22 +14,13 @@ import ViewSwipe from './app/components/ViewSwipe';
 
 // Gobal Variables
 const GOOGLE_API_KEY = "";
-let LOCATION = "40.730604,-73.9937027"; //default location (Facebook NYC)
 const RADIUS  = 5000; // radius in meters (5k is 3.1 miles)
 const TYPES = "food,restaurant,bar";
-
-
-// Get User Location
-navigator.geolocation.getCurrentPosition(function(response) {
-  let lat = response.coords.latitude;
-  let lng = response.coords.longitude;
-  LOCATION = lat + "," + lng;
-});
+// const LOCATION = "40.730604,-73.9937027", // default location (Facebook NYC) for testing
 
 
 // App Component
 export default class App extends Component {
-
 
   // Track which Component is selected
   constructor(props) {
@@ -65,14 +56,15 @@ export default class App extends Component {
 
 
   // Search Google API (using cuisine submission)
-  _searchSelectedCuisines(submission) {
+  _searchSelectedCuisines(submission, location) {
 
     // Need to hold on to "this"
     let appComponent = this;
 
+    // Call on Google Places API to find places with radius
     axios.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?', {
       params: {
-        location: LOCATION,
+        location: location,
         radius: RADIUS,
         types: TYPES + "," + submission,
         name: submission,

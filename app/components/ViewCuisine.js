@@ -47,7 +47,7 @@ export default class ViewCuisine extends Component {
 
   // Toggle the selected cuisine (local to component)
   _toggleCuisine(name, boolean) {
-    
+
     let selectedCuisines = this.state.selectedCuisines;
 
     for (let i=0; i<selectedCuisines.length; i++) {
@@ -63,19 +63,28 @@ export default class ViewCuisine extends Component {
   // Submit current selection
   _submitSelection() {
 
+    // Need to hold on to "this"
+    let thisComponent = this;
+
+    // Get cuisines and create string of parameters
     let cuisinesObjects = this.state.selectedCuisines;
     let cuisines = [];
-
     for (let i=0; i<cuisinesObjects.length; i++) {
       if (cuisinesObjects[i].selected) {
         cuisines.push(cuisinesObjects[i].name)
       }
     }
-
     cuisines = cuisines.join(",");
 
-    this.props._searchSelectedCuisines(cuisines);
-    
+
+    // Get User Location and then pass parameters up to parent
+    navigator.geolocation.getCurrentPosition(function(response) {
+      let lat = response.coords.latitude;
+      let lng = response.coords.longitude;
+      let location = lat + "," + lng;
+      thisComponent.props._searchSelectedCuisines(cuisines, location);
+    });
+
   }
 
 
@@ -87,7 +96,7 @@ export default class ViewCuisine extends Component {
         </ListItem>
 
         {this.state.selectedCuisines.map(function(item, i) {
-          
+
           return (
             <ListItem key={i} onPress={ () => this._toggleCuisine(item.name, item.selected)} >
               <CheckBox checked={item.selected} />
